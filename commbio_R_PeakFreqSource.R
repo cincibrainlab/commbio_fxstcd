@@ -3,26 +3,25 @@
 # Version: 3/27/2022
 source("_Common.R")
 
-pacman::p_load(
-  R.matlab,
-  tidyverse,
-  here,
-  weights,
-  flextable,
-  reshape2,
-  rstatix,
-  hdf5r,
-  DescTools,
-  nlme,
-  emmeans,
-  ggthemes,
-  broom.mixed,
-  dotwhisker,
-  ggsci,
-  ggsignif,
-  units,
-  ggsegDefaultExtra
-)
+# pacman::p_load(
+#   tidyverse,
+#   weights,
+#   flextable,
+#   reshape2,
+#   rstatix,
+#   hdf5r,
+#   DescTools,
+#   nlme,
+#   emmeans,
+#   ggthemes,
+#   broom.mixed,
+#   dotwhisker,
+#   ggsci,
+#   ggsignif,
+#   units,
+#   ggsegDefaultExtra
+# )
+pacman::p_load(tidyverse, weights, flextable, nlme, emmeans, ggthemes, broom.mixed, ggsignif, ggsignif, units)
 
 pacman::p_load_current_gh("LCBC-UiO/ggsegDefaultExtra", "ggseg/ggseg")
 
