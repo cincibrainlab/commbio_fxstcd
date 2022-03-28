@@ -67,30 +67,34 @@ stopifnot(nrow(df.aac) == 57528)
 #                filter(powertype == "relative"))
 # anova(fit.1)
 
-# Sex is non-contributory to model, so will remove
-model.aac.sex <- value ~ group * lowerband * RSN * sex
-model.aac.rsn <- value ~ group * lowerband * RSN
-model.aac.region <- value ~ group * lowerband * label
+
 
 load(url("https://figshare.com/ndownloader/files/34535801"))
 nodeinfo <- read_csv("https://figshare.com/ndownloader/files/34517354")
 
 # ============================= LMES  ===========================================
 target_file_fit_region <- str_replace(target_file, ".RData", "_fit_region.RData")
+
+# Sex is non-contributory to model, so will remove
+model.aac.sex <- value ~ group * lowerband * RSN * sex
+model.aac.rsn <- value ~ group * lowerband * RSN
+model.aac.region <- value ~ group * lowerband * label
+
 run_model = FALSE
 if(run_model == TRUE){
   fit.aac.region <- lme(model.aac.region, random = ~1|eegid,
                         correlation=corCompSymm(form=~1|eegid),
                         data = df.aac %>% filter(powertype == "relative"))
   save(fit.aac.region, file = target_file_fit_region)
-}
+}else{
 load(target_file_fit_region)
+}
 anova(fit.aac.region)
 #sjPlot:: tab_model(fit.aac.region)
 #sjPlot::plot_model(fit.aac.region)
 target_file_fit_rsn <- str_replace(target_file, ".RData", "_fit_rsn.RData")
 
-if(run_model == FALSE){
+if(run_model == TRUE){
   
   fit.aac.rsn <- lme(model.aac.rsn, random = ~1|eegid,
                      correlation=corCompSymm(form=~1|eegid), 
